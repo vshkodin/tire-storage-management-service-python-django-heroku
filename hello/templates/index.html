@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <img src="{% static 'logo.png'%}">
+      <h1>Tire Storage Management Service.</h1>
+      <br />
+      <form method="post" action="{% url 'home' %}">
+      {% csrf_token %}
+      username:
+      <input type="text" name="username">
+      <br />
+      <br />
+      password:
+      <input type="password" name="password" />
+      <br />
+      <br />
+      <br />
+      <input class="btn-primary" type="submit" value="Login" style="width:250px;height:50px;" />
+      </form>
+
+      {% if error %}
+      <br />
+      <p style="color:red">{{ error }}</p>
+      <br />
+     
+      {% endif %}
+
+
+  </div>
+</div>
+{% endblock %}

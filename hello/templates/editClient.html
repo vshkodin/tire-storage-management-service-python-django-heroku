@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+<div class="container">
+<form method="post" action="{% url 'updateClient' %}">
+	{% csrf_token %}
+      clientId:
+      <input type="text" name="clientId" value="{{ clientId }}">
+      <br />
+      <br />
+      first_name:
+      <input type="text" name="first_name" value="{{ first_name }}">
+      <br />
+      <br />
+      last_name:
+      <input type="text" name="last_name" value="{{ last_name}}"/>
+      <br />
+      <br />
+      email:
+      <input type="text" name="email" value="{{ email}}">
+      <br />
+      <br />
+      phone:
+      <input type="text" name="phone" value="{{ phone}}">
+      <br />
+      <br />
+      size:
+      <input type="text" name="size" value="{{ size}}">
+      <br />
+      <br />
+      tireName:
+      <input type="text" name="tireName" value="{{ tireName }}">
+      <br />
+      <br />
+      tireCount:
+      <input type="text" name="tireCount" value="{{ tireCount }}">
+      <br />
+      <br />
+	  platesNum:
+      <input type="text" name="platesNum" value="{{ platesNum }}">
+      <br />
+      <br />
+      dateOut:
+      <input type="text" name="dateOut"  id="datepicker" value="{{ dateOut}}">
+      <br />
+      <br />
+      dateIn:
+      <input type="text" name="dateIn"  id="datepicker2" value="{{ dateIn}}">
+      <br />
+      <br />
+	  price:
+      <input type="text" name="price" value="{{ price}}">
+ 	  <br />
+      <br />
+	  totalPrice:
+      <input type="text" name="totalPrice" value="{{ totalPrice}}">
+      <br />
+      <br />
+    totalDays:
+        <input type="text" name="totalDays" value="{{ totalDays}}">
+        <br />
+        <br />
+	  note:
+      <input type="text" name="note" value="{{ note}}">
+      <br />
+      <br />
+	  onCall:
+      <input type="text" name="onCall" value="{{ onCall}}">
+      <br />
+      <br />
+      
+
+
+<table id="t03" >
+  <tr>
+    <th>
+          
+       <input class="btn-primary" type="submit" value="Update" style="width:250px;height:50px;" />
+      </form>   
+    </th>
+    <th>
+           <form method="post" action="{% url 'home' %}">
+      {% csrf_token %}
+      <input type="hidden" name="username" value="raguzov">
+      <input type="hidden"name="password" value="Yi7bipb2wowpower"/>
+      <input class="btn-primary" type="submit" value="Back" style="width:250px;height:50px;" />
+      </form>
+    </th> 
+
+  </tr>
+  </table>
+
+     
+
+
+      <br />
+      <br />
+<table id="t02" >
+  <tr>
+    <th> ClientId </th>
+    <th> first_name </th>
+    <th> last_name </th>
+    <th> email </th>
+    <th> phone </th>
+    <th> size </th>
+    <th> tireName </th>
+    <th> tireCount </th>
+    <th> platesNum </th>
+    <th> dateOut </th>
+    <th> dateIn </th>
+    <th> price </th>
+    <th> totalPrice </th>
+    <th> totalDays </th>
+    <th> note </th>
+    <th> onCall </th>
+    <th> Updated </th>
+  </tr>
+  {% for client in clientsRows %}
+  <tr>
+    <td> {{ client.clientId }} </td>
+    <td> {{ client.first_name }} </td>
+    <td> {{ client.last_name }} </td>
+    <td> {{ client.email }} </td>
+    <td> {{ client.phone }} </td>
+    <td> {{ client.size }} </td>
+    <td> {{ client.tireName }} </td>
+    <td> {{ client.tireCount }} </td>
+    <td> {{ client.platesNum }} </td>
+    <td> {{ client.dateOut }} </td>
+    <td> {{ client.dateIn }} </td>
+    <td> {{ client.price }} </td>
+    <td> {{ client.totalPrice }} </td>
+    <td> {{ client.totalDays }} </td>
+    <td> {{ client.note }} </td>
+    <td> {{ client.onCall }} </td>
+    <td> {{ client.when }} </td>
+    </tr>
+  {% endfor %}
+</table>
+
+
+
+
+
+
+
+{% endblock %}

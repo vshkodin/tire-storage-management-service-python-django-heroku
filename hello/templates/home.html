@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+<script LANGUAGE="JavaScript">
+  function fireClickEvent(element) {
+    var evt = new window.MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+
+    element.dispatchEvent(evt);
+  }
+
+
+
+
+    function parseDate(input) {
+      var parts = input.match(/(\d+)/g);
+      // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+      return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+    }
+
+
+
+  function getDaysCount() {
+      // var dayIn = document.getElementById("datepicker2").value;
+      // console.log("dayIn  "+dayIn)
+      // var dayInparsed = parseDate(dayIn);
+      // console.log("dayInparsed "+dayInparsed)
+      // var dayOut = document.getElementById("datepicker").value;
+      // console.log("dayOut  "+dayOut)
+      // var dayOutparsed = parseDate(dayOut);
+      // console.log("dayInparsed "+dayOutparsed)
+
+      var dateIn = new Date(document.getElementById("datepicker2").value); 
+      var dateOut = new Date(document.getElementById("datepicker").value); 
+      console.log("date1 "+dateIn)
+      console.log("date2 "+dateOut)
+
+      var Difference_In_Time = dateIn.getTime() - dateOut.getTime(); 
+      var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+      // console.log(("Total number of days between dates "
+      //          + dateIn + " and " 
+      //          + dateOut + " is:  " 
+      //          + Difference_In_Days));
+      document.getElementById("totalDays").value = (-Difference_In_Days); 
+      return Difference_In_Days; 
+    }
+
+
+
+
+
+  
+    function myFunction() {
+      var pricePerDay = document.getElementById("price").value;
+      var pricePerDayParsed = parseInt(pricePerDay); 
+      // console.log("pricePerDayParsed "+pricePerDayParsed);
+      // console.log("daysDiffFromFields "+getDaysCount());
+      var totatl = pricePerDayParsed * (-getDaysCount());
+      console.log("totatl "+totatl);
+      document.getElementById("totalPrice").value = totatl; 
+    }
+
+
+
+
+  function confirmSubmit(targetURL) {
+    var agree = confirm("Are you sure you wish to continue?");
+    if (agree) {
+      var a = document.createElement('a');
+      a.href = targetURL;
+      fireClickEvent(a);
+    }
+    else
+      return false;
+  }
+</script>
+
+
+
+
+<script>
+  function update() {
+    $("#dialog").dialog();
+  }
+</script>
+
+
+<div class="container">
+
+  <table id="t01">
+    <tr style="border: 1px solid transparent">
+      <th style="border: 1px solid transparent">
+        <br />
+        <hr style="height:0.1px; visibility:hidden;" />
+        <h2>Clients</h2>
+      </th>
+
+      <th style="border: 1px solid transparent">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+          function create() {
+            $("#dialog").dialog();
+          }
+        </script>
+
+        <div id="dialog" title="Update" style="display:none;">
+          <p class="validateTips">All form fields are required.</p>
+
+          <form id='popUp' method="POST" action="{% url 'createClient' %}">
+            {% csrf_token %}
+
+            <fieldset>
+              <label for="clientId">clientId</label>
+              <br />
+              <input type="text" name="clientId" id="clientId" value="" class="text">
+              <br />
+              <label for="first_name">First_name</label>
+              <br />
+              <input type="text" name="first_name" id="first_name" value="" class="text">
+              <br />
+              <label for="last_name">last_name</label>
+              <br />
+              <input type="text" name="last_name" id="last_name" value="" class="text">
+              <br />
+              <label for="email">email</label>
+              <br />
+              <input type="text" name="email" id="email" value="" class="text">
+              <br />
+              <label for="phone">phone</label>
+              <br />
+              <input type="text" name="phone" id="phone" value="" class="text">
+              <br />
+              <label for="size">size</label>
+              <br />
+              <input type="text" name="size" id="size" value="" class="text">
+              <br />
+              <label for="tireName">tireName</label>
+              <br />
+              <input type="text" name="tireName" id="tireName" value="" class="text">
+              <br />
+              <label for="tireCount">tireCount</label>
+              <br />
+              <input type="text" name="tireCount" id="tireCount" value="" class="text">
+              <br />
+              <label for="platesNum">platesNum</label>
+              <br />
+              <input type="text" name="platesNum" id="platesNum" value="" class="text">
+              <br />
+              <label for="dateIn">dateIn</label>
+              <br />
+              <input type="text" name="dateIn" id="datepicker2" value="" class="text">
+              <br />
+              <label for="dateOut">dateOut</label>
+              <br />
+              <input type="text" name="dateOut" id="datepicker" value="" class="text">
+              <br />
+              <label for="price">price</label>
+              <br />
+              <input type="text" name="price" id="price" value="" class="text">
+              <br />
+              <label for="totalPrice">totalPrice</label>
+              <br />
+              <input type="text" name="totalPrice" id="totalPrice" onclick="myFunction()" value="" class="text">
+              <br />
+              <label for="totalDays">totalDays</label>
+              <br />
+              <input type="text" name="totalDays" id="totalDays"  value="" class="text">
+              <br />
+              <label for="note">note</label>
+              <br />
+              <input type="text" name="note" id="note" value="" class="text">
+              <br />
+              <label for="onCall">onCall</label>
+              <br />
+              <input type="text" name="onCall" id="onCall" value="" class="text">
+
+              <br />
+              <br />
+              <input class="btn-primary" type="submit" value="Create" style="width:60px;height:30px;" />
+              <br />
+              <br />
+            </fieldset>
+          </form>
+        </div>
+        <hr style="height:11px; visibility:hidden;" />
+        <button onclick='create()'> + </button>
+      </th>
+    </tr>
+  </table>
+  {% if error %}
+  <br />
+  <p style="color:red">{{ error }}</p>
+  <br />
+  {% endif %}
+  <table id="t02">
+    <tr>
+      <th> ClientId </th>
+      <th> first_name </th>
+      <th> last_name </th>
+      <th> email </th>
+      <th> phone </th>
+      <th> size </th>
+      <th> tireName </th>
+      <th> tireCount </th>
+      <th> platesNum </th>
+      <th> dateOut </th>
+      <th> dateIn </th>
+      <th> price </th>
+      <th> totalPrice </th>
+      <th> totalDays </th>
+      <th> note </th>
+      <th> onCall </th>
+
+    </tr>
+
+    {% for client in clientsRows %}
+    <tr>
+      <td> {{ client.clientId }} </td>
+      <td> {{ client.first_name }} </td>
+      <td> {{ client.last_name }} </td>
+      <td> {{ client.email }} </td>
+      <td> {{ client.phone }} </td>
+      <td> {{ client.size }} </td>
+      <td> {{ client.tireName }} </td>
+      <td> {{ client.tireCount }} </td>
+      <td> {{ client.platesNum }} </td>
+      <td> {{ client.dateOut }} </td>
+      <td> {{ client.dateIn }} </td>
+      <td> {{ client.price }} </td>
+      <td> {{ client.totalPrice }} </td>
+      <td> {{ client.totalDays }} </td>
+      <td> {{ client.note }} </td>
+      <td> {{ client.onCall }} </td>
+      <td>
+        <form method="POST" action="{% url 'editClient' %}">
+          {% csrf_token %}
+          <input type="hidden" id="clientId" name="clientId" value="{{ client.clientId }}">
+          <input type="hidden" name="first_name" id="first_name" value="{{ client.first_name }}" class="text">
+          <input type="hidden" name="last_name" id="last_name" value="{{ client.last_name }}" class="text">
+          <input type="hidden" name="email" id="email" value="{{ client.email }}" class="text">
+          <input type="hidden" name="phone" id="phone" value="{{ client.phone }}" class="text">
+          <input type="hidden" name="size" id="size" value="{{ client.size }}" class="text">
+          <input type="hidden" name="tireName" id="tireName" value="{{ client.tireName }}" class="text">
+          <input type="hidden" name="tireCount" id="tireCount" value="{{ client.tireCount }}" class="text">
+          <input type="hidden" name="platesNum" id="platesNum" value="{{ client.platesNum }}" class="text">
+          <input type="hidden" name="dateOut" id="dateOut" value="{{ client.dateOut }}" class="text">
+          <input type="hidden" name="dateIn" id="dateIn" value="{{ client.dateIn }}" class="text">
+          <input type="hidden" name="totalDays" value="{{ client.totalDays }}" class="text">
+          <input type="hidden" name="price"  value="{{ client.price }}" class="text">
+          <input type="hidden" name="totalPrice"  value="{{ client.totalPrice }}" class="text">
+          <input type="hidden" name="note" id="note" value="{{ client.note }}" class="text">
+          <input type="hidden" name="onCall" id="onCall" value="{{ client.onCall }}" class="text">
+          <input class="btn-primary" type="submit" value="Update" style="width:60px;height:25px;" />
+        </form>
+      </td>
+
+    <td>
+      <form method="POST" action="{% url 'pdf' %}">
+        {% csrf_token %}
+        <input type="hidden" id="clientId" name="clientId" value="{{ client.clientId }}">
+        <input type="hidden" name="first_name" id="first_name" value="{{ client.first_name }}" class="text">
+        <input type="hidden" name="last_name" id="last_name" value="{{ client.last_name }}" class="text">
+        <input type="hidden" name="email" id="email" value="{{ client.email }}" class="text">
+        <input type="hidden" name="phone" id="phone" value="{{ client.phone }}" class="text">
+        <input type="hidden" name="size" id="size" value="{{ client.size }}" class="text">
+        <input type="hidden" name="tireName" id="tireName" value="{{ client.tireName }}" class="text">
+        <input type="hidden" name="tireCount" id="tireCount" value="{{ client.tireCount }}" class="text">
+        <input type="hidden" name="platesNum" id="platesNum" value="{{ client.platesNum }}" class="text">
+        <input type="hidden" name="dateOut" id="dateOut" value="{{ client.dateOut }}" class="text">
+        <input type="hidden" name="dateIn" id="dateIn" value="{{ client.dateIn }}" class="text">
+        <input type="hidden" name="totalDays" value="{{ client.totalDays }}" class="text">
+        <input type="hidden" name="price"  value="{{ client.price }}" class="text">
+        <input type="hidden" name="totalPrice"  value="{{ client.totalPrice }}" class="text">
+        <input type="hidden" name="note" id="note" value="{{ client.note }}" class="text">
+        <input type="hidden" name="onCall" id="onCall" value="{{ client.onCall }}" class="text">
+        <input class="btn-primary" type="submit" value="Print" style="width:60px;height:25px;" />
+      </form>
+    </td>
+
+      <th>
+        <input TYPE='submit' value='Delete' name='delete'
+          onClick='return confirmSubmit("{% url "removeClient" %}?clientId={{ client.clientId }}")'>
+      </th>
+
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
