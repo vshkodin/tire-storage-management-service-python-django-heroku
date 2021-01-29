@@ -1,5 +1,5 @@
 ### Tire Managment Service using Python, Django, Heroku
-#### Little web app for Tire Storage Management based on Python and Django.
+#### Little web app for Tire Storage Management based on Python, Django. Ready for deploying on Heroku.
 ##### Please give a "star" if it helped you.
 * Django app, which can easily be deployed to Heroku.
 * Update with your logo hello/static/logo.png
