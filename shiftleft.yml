@@ -10,3 +10,10 @@ build_rules:
       - SEVERITY_HIGH_IMPACT
       - SEVERITY_LOW_IMPACT
     threshold: 0
+  - id: another-build-rule
+    severity:
+      - info
+      - moderate
+      - critical
+    threshold: 0
+
