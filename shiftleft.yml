@@ -1,0 +1,7 @@
+build_rules:
+  - id: another-build-rule
+    severity:
+      - info
+      - moderate
+      - critical
+    threshold: 0
