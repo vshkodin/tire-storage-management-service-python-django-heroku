@@ -37,8 +37,7 @@ jobs:
     - name: Validate Build Rules
       run: |
        ${GITHUB_WORKSPACE}/sl check-analysis --app tire-storage-management-service-python-django-heroku \
-          --source 'tag.branch=${{ github.event.pull_request.base.ref }}' \
-          --target "tag.branch=${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
+          --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
           --report \
           --github-pr-number=${{github.event.number}} \
           --github-pr-user=${{ github.repository_owner }} \
